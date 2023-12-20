@@ -51,7 +51,7 @@ def train_predictor(model,
     if distributed:  # to do
         _dist_train(model, dataset, cfg, validate=validate)
     else:
-        _non_dist_train(model, dataset, cfg, validate=validate)
+        _non_dist_train(model, dataset, cfg, validate=validate, logger=logger)
 
 
 def _dist_train(model, dataset, cfg, validate=False):
@@ -59,7 +59,7 @@ def _dist_train(model, dataset, cfg, validate=False):
     raise NotImplementedError
 
 
-def _non_dist_train(model, dataset, cfg, validate=False):
+def _non_dist_train(model, dataset, cfg, validate=False, logger=None):
     # prepare data loaders
     data_loaders = [
         build_dataloader(
@@ -77,7 +77,7 @@ def _non_dist_train(model, dataset, cfg, validate=False):
 
     optimizer = build_optimizer(model, cfg.optimizer)
     runner = Runner(model, batch_processor, optimizer, cfg.work_dir,
-                    cfg.log_level)
+                    logger=logger)
 
     runner.register_training_hooks(cfg.lr_config, cfg.optimizer_config,
                                    cfg.checkpoint_config, cfg.log_config)
