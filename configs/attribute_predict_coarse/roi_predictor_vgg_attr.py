@@ -45,7 +45,7 @@ data_root = 'data/Attr_Predict'
 img_norm = dict(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 data = dict(
     imgs_per_gpu=32,
-    workers_per_gpu=4,
+    workers_per_gpu=2,
     train=dict(
         type=dataset_type,
         img_path=os.path.join(data_root, 'Img'),
@@ -98,7 +98,7 @@ log_config = dict(
 
 start_epoch = 0
 total_epochs = 80
-gpus = dict(train=[0, 1, 2, 3], test=[0, 1, 2, 3])
+gpus = dict(train=[0], test=[0])
 work_dir = 'checkpoint/Predict/vgg/roi'
 print_interval = 20  # interval to print information
 save_interval = 5
