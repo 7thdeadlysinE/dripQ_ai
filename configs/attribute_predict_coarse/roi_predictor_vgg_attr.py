@@ -97,7 +97,7 @@ log_config = dict(
     ])
 
 start_epoch = 0
-total_epochs = 80
+total_epochs = 50
 gpus = dict(train=[0], test=[0])
 work_dir = 'checkpoint/Predict/vgg/roi'
 print_interval = 20  # interval to print information
